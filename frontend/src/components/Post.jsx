@@ -1,8 +1,10 @@
-import {HiUserCircle} from 'react-icons/hi'
 import {BsThreeDots} from 'react-icons/bs'
-import {AiTwotoneLike} from 'react-icons/ai'
-import {AiOutlineLike} from 'react-icons/ai'
+import {AiTwotoneLike,AiOutlineLike,AiOutlineFileGif} from 'react-icons/ai'
 import {FaComment,FaRegComment} from 'react-icons/fa'
+import {MdOutlineEmojiEmotions} from 'react-icons/md'
+import {BiCamera} from 'react-icons/bi'
+import Avatar from '@mui/material/Avatar'
+
 
 import post_image from './../../../facebook.png'
 
@@ -11,8 +13,8 @@ const PostHeader = () => {
     <div className='mb-4 flex justify-between items-center'>
       {/* User details div */}
       <div className='flex justify-center items-center w-fit'>
-        <HiUserCircle className='text-4xl text-gray-600 mr-2' />
-        <p className='font-semibold'>UserName</p>
+        <Avatar sx={{width:"40px",height:"40px",backgroundColor:"primary.dark"}} className='mr-2'>S</Avatar>
+        <p className='font-semibold'>Sparsh</p>
       </div>
 
       {/* Menu button */}
@@ -67,14 +69,22 @@ const PostFooter = () => {
       </div>
 
       {/* Add Comment */}
-      <div className='flex mt-3'>
-        <HiUserCircle className='text-4xl text-gray-600 mr-2' />
-        <div className='w-full relative'>
-          <input type="text" placeholder='Enter your comment ...' className='w-full h-[33px] bg-gray-300 rounded-full px-4 py-2 font-semibold focus:outline-none' />
-          <div className='absolute h-full flex justify-between items-center right-3 top-0'>
+      <div className='flex items-center mt-3'>
+        <Avatar sx={{width:"40px",height:"40px",backgroundColor:"primary.dark"}} className='mr-2'>S</Avatar>
+        <div className='w-full h-[35px] relative'>
+          <input type="text" placeholder='Enter your comment ...' className='w-full h-full bg-gray-300 rounded-full px-4 py-2 font-semibold focus:outline-none' />
+          {/* <div className='absolute h-full flex justify-between items-center right-3 top-0'>
             <HiUserCircle className='text-xl' />
             <HiUserCircle className='text-xl' />
             <HiUserCircle className='text-xl' />
+          </div> */}
+          <div className='h-full absolute right-3 top-0 flex justify-center items-center'>
+            <div className='w-fit px-[4px] mr-2 py-[4px] text-gray-600 hover:text-black hover:bg-slate-400 hover:rounded-full'>
+              <MdOutlineEmojiEmotions className='text-xl font-bold' /></div>
+            <div className='w-fit px-[4px] mr-2 py-[4px] text-gray-600 hover:text-black hover:bg-slate-400 hover:rounded-full'>
+              <BiCamera className='text-xl font-bold' /></div>
+            <div className='w-fit px-[4px] mr-2 py-[4px] text-gray-600 hover:text-black hover:bg-slate-400 hover:rounded-full'>
+              <AiOutlineFileGif className='text-xl font-bold' /></div>
           </div>
         </div>
       </div>

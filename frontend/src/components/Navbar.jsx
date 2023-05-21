@@ -2,12 +2,12 @@ import { useState } from "react";
 import { BsFacebook, BsPeopleFill } from "react-icons/bs";
 import { MdMessage, MdOndemandVideo } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
-import {BiStore} from 'react-icons/bi'
-import {AiFillHome} from 'react-icons/ai'
-import {BiSearch} from 'react-icons/bi'
+import { BiStore } from "react-icons/bi";
+import { AiFillHome } from "react-icons/ai";
+import { BiSearch } from "react-icons/bi";
 
 const Navbar = () => {
-  const [iconIndex,setIconIndex]=useState(0);
+  const [iconIndex, setIconIndex] = useState(0);
 
   return (
     <div>
@@ -27,23 +27,43 @@ const Navbar = () => {
 
         {/* Side notifications and message div */}
         <div className="flex justify-center items-center mr-5">
-          <MdMessage className="text-4xl p-2 rounded-3xl bg-gray-200 mr-2" />
-          <IoNotifications className="text-4xl p-2 rounded-3xl bg-gray-200" />
+          <MdMessage className="text-4xl p-2 rounded-3xl bg-gray-200 mr-2 hover:cursor-pointer" />
+          <IoNotifications className="text-4xl p-2 rounded-3xl bg-gray-200 hover:cursor-pointer" />
         </div>
       </div>
 
       {/* Center tabs div */}
       <div className="flex justify-center items-center z-20 fixed top-0 w-full">
-        <div onClick={()=> setIconIndex(0)} className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${iconIndex===0?"border-b-4 border-blue-700 text-blue-700":""}`}>
+        <div
+          onClick={() => setIconIndex(0)}
+          className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${
+            iconIndex === 0 ? "border-b-4 border-blue-700 text-blue-700" : ""
+          } hover:cursor-pointer`}
+        >
           <AiFillHome className="text-2xl mb-1" />
         </div>
-        <div onClick={()=> setIconIndex(1)} className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${iconIndex===1?"border-b-4 border-blue-700 text-blue-700":""}`}>
+        <div
+          onClick={() => setIconIndex(1)}
+          className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${
+            iconIndex === 1 ? "border-b-4 border-blue-700 text-blue-700" : ""
+          } hover:cursor-pointer`}
+        >
           <MdOndemandVideo className="text-2xl mb-1" />
         </div>
-        <div onClick={()=> setIconIndex(2)} className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${iconIndex===2?"border-b-4 border-blue-700 text-blue-700":""}`}>
+        <div
+          onClick={() => setIconIndex(2)}
+          className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${
+            iconIndex === 2 ? "border-b-4 border-blue-700 text-blue-700" : ""
+          } hover:cursor-pointer`}
+        >
           <BiStore className="text-2xl mb-1" />
         </div>
-        <div onClick={()=> setIconIndex(3)} className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${iconIndex===3?"border-b-4 border-blue-700 text-blue-700":""}`}>
+        <div
+          onClick={() => setIconIndex(3)}
+          className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${
+            iconIndex === 3 ? "border-b-4 border-blue-700 text-blue-700" : ""
+          } hover:cursor-pointer`}
+        >
           <BsPeopleFill className="text-2xl mb-1" />
         </div>
       </div>

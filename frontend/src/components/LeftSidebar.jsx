@@ -1,5 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import { FiLogOut } from "react-icons/fi";
+import { signOut } from "firebase/auth";
+import { auth } from './../../firebase'
 
 const LeftSidebar = () => {
   return (
@@ -70,7 +72,7 @@ const LeftSidebar = () => {
           <p className="text-lg font-bold">Memories</p>
         </li>
 
-        <li className="flex p-2 justify-start items-center w-2/3 rounded-xl hover:bg-white transition-all ease-in-out duration-150 cursor-pointer">
+        <li onClick={()=> signOut(auth)} className="flex p-2 justify-start items-center w-2/3 rounded-xl hover:bg-white transition-all ease-in-out duration-150 cursor-pointer">
           <FiLogOut className="text-3xl mr-3 text-blue-500" />
           <p className="text-lg font-bold">Log Out</p>
         </li>

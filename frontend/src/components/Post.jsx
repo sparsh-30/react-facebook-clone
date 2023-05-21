@@ -4,8 +4,7 @@ import { FaComment, FaRegComment } from "react-icons/fa";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { BiCamera } from "react-icons/bi";
 import Avatar from "@mui/material/Avatar";
-
-import post_image from "./../../../facebook.jpg";
+import post_image from "./../assets/post_image.jpg";
 
 const PostHeader = () => {
   return (
@@ -133,7 +132,7 @@ const PostFooter = () => {
 
 const Post = () => {
   return (
-    <div className="bg-white rounded-xl p-5 mt-4">
+    <div className="bg-white rounded-xl p-5 my-4">
       <PostHeader />
       <PostBody />
       <PostFooter />

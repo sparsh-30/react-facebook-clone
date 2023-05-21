@@ -1,6 +1,6 @@
-import story_image from "./../../../demo.jfif";
+import story_image from "./../assets/demo.jfif";
+import Background from "./../assets/background.avif";
 import Avatar from "@mui/material/Avatar";
-import Background from "./../../../background.avif";
 import { IoMdAddCircle } from "react-icons/io";
 
 const Story = () => {

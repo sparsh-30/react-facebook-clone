@@ -3,8 +3,13 @@ import SendIcon from "@mui/icons-material/Send";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
+import { useSelector } from "react-redux";
 
 const AddPost = () => {
+
+  const firstName=useSelector((state) => state.user.firstName);
+  const initial=useSelector((state) => state.user.initial);
+
   return (
     <div className="rounded-xl py-5 px-5 bg-white z-20">
       {/* Profile picture and write something input box */}
@@ -17,12 +22,12 @@ const AddPost = () => {
           }}
           className="mr-2"
         >
-          S
+          {initial}
         </Avatar>
         <div className="w-full h-[35px] relative">
           <input
             type="text"
-            placeholder={`What's in your mind, ${"Sparsh"} ?`}
+            placeholder={`What's in your mind, ${firstName} ?`}
             className="w-full h-full bg-gray-300 rounded-full px-4 py-2 font-semibold focus:outline-none"
           />
         </div>

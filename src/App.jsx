@@ -1,24 +1,36 @@
 import Navbar from "./components/Navbar";
 import LeftSidebar from "./components/LeftSidebar";
 import PostHolder from "./components/PostHolder";
-import { useEffect, useState } from "react";
 import Login from "./components/Login";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setFirstName,
+  setLastName,
+  signInUser,
+  signOutUser,
+} from "./store/userSlice";
+import { useEffect } from "react";
 import { auth } from "./../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [signedUser, setSignedUser] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userSignedIn);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) setSignedUser(true);
-      else setSignedUser(false);
+      if (user) {
+        const names = user.displayName.split(" ");
+        dispatch(setFirstName(names[0]));
+        dispatch(setLastName(names[names.length - 1]));
+        dispatch(signInUser());
+      } else dispatch(signOutUser());
     });
-  }, []);
+  });
 
   return (
-    <>
-      {signedUser === false ? (
+    <div>
+      {user === false ? (
         <Login />
       ) : (
         <div>
@@ -30,7 +42,7 @@ function App() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

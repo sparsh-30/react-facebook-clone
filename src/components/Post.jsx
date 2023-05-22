@@ -5,8 +5,14 @@ import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { BiCamera } from "react-icons/bi";
 import Avatar from "@mui/material/Avatar";
 import post_image from "./../assets/post_image.jpg";
+import { useSelector } from "react-redux";
 
 const PostHeader = () => {
+
+  const firstName=useSelector((state) => state.user.firstName);
+  const lastName=useSelector((state) => state.user.lastName);
+  const initial=useSelector((state) => state.user.initial);
+
   return (
     <div className="mb-4 flex justify-between items-center">
       {/* User details div */}
@@ -19,9 +25,9 @@ const PostHeader = () => {
           }}
           className="mr-2"
         >
-          S
+          {initial}
         </Avatar>
-        <p className="font-semibold">Sparsh</p>
+        <p className="font-semibold">{firstName+" "+lastName}</p>
       </div>
 
       {/* Menu button */}
@@ -62,6 +68,9 @@ const PostBody = () => {
 };
 
 const PostFooter = () => {
+
+  const initial=useSelector((state) => state.user.initial);
+
   return (
     <div>
       {/* Number of likes and comments */}
@@ -100,7 +109,7 @@ const PostFooter = () => {
           }}
           className="mr-2"
         >
-          S
+          {initial}
         </Avatar>
         <div className="w-full h-[35px] relative">
           <input

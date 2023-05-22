@@ -6,16 +6,22 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 import { auth } from "./../../firebase";
+import { useDispatch } from 'react-redux'
+import { setFirstName, setLastName } from './../store/userSlice'
 
 const Login = () => {
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
+
+  const dispatch=useDispatch();
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         console.log(result);
         console.log(result._tokenResponse.fullName);
+        dispatch(setFirstName(result._tokenResponse.firstName));
+        dispatch(setLastName(result._tokenResponse.lastName));
       })
       .catch((error) => {
         console.log(error);

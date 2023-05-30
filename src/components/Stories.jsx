@@ -27,14 +27,17 @@ const Story = () => {
 
 const Stories = () => {
   return (
-    <div className="my-4 py-5 px-2 flex bg-white rounded-lg w-full overflow-x-scroll">
-      <div className="flex">
-        <AddStory />
-        <Story />
-        <Story />
-        <Story />
-        <Story />
-        <Story />
+    <div>
+      {/* <div className="w-[100vw] h-[100vh] bg-white fixed top-0 left-0 z-50"></div> */}
+      <div id="stories-holder" className="my-4 py-5 px-2 flex bg-white rounded-lg w-full overflow-x-scroll">
+        <div className="flex">
+          <AddStory />
+          <Story />
+          <Story />
+          <Story />
+          <Story />
+          <Story />
+        </div>
       </div>
     </div>
   );

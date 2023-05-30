@@ -11,7 +11,6 @@ const LeftSidebar = () => {
 
   const firstName = useSelector((state) => state.user.firstName);
   const lastName = useSelector((state) => state.user.lastName);
-  const initial = useSelector((state) => state.user.initial);
 
   const handleLogOut = () => {
     signOut(auth).then(() => dispatch(signOutUser()));
@@ -25,7 +24,7 @@ const LeftSidebar = () => {
             sx={{ width: "35px", height: "35px", backgroundColor: "info.main" }}
             className="mr-3 text-blue-600"
           >
-            {initial}
+            {firstName.charAt(0)}
           </Avatar>
           <p className="text-lg font-bold">{firstName + " " + lastName}</p>
         </li>

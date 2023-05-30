@@ -3,8 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userSignedIn: false,
   firstName: "",
-  lastName: "",
-  initial: "",
+  lastName: ""
 };
 
 export const userSlice = createSlice({
@@ -13,7 +12,6 @@ export const userSlice = createSlice({
   reducers: {
     setFirstName: (state, action) => {
       state.firstName = action.payload;
-      state.initial = action.payload.charAt(0);
     },
     setLastName: (state, action) => {
       state.lastName = action.payload;

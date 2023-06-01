@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   showStoryScreen: false,
+  showPictureScreen: false,
 };
 
 export const screenSlice = createSlice({
@@ -14,9 +15,20 @@ export const screenSlice = createSlice({
     hideStoryScreen: (state) => {
       state.showStoryScreen = false;
     },
+    displayPictureScreen: (state) => {
+      state.showPictureScreen = true;
+    },
+    hidePictureScreen: (state) => {
+      state.showPictureScreen = false;
+    },
   },
 });
 
-export const { displayStoryScreen, hideStoryScreen } = screenSlice.actions;
+export const {
+  displayStoryScreen,
+  hideStoryScreen,
+  displayPictureScreen,
+  hidePictureScreen,
+} = screenSlice.actions;
 
 export default screenSlice.reducer;

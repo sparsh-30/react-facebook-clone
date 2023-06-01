@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { hideStoryScreen } from "../store/screenSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { db, storage } from "./../../firebase";
+import { db, storage, auth } from "./../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
-import date from 'date-and-time';
+import date from "date-and-time";
 
 const AddStoryScreen = () => {
   const [storyImage, setStoryImage] = useState("");
@@ -32,13 +32,15 @@ const AddStoryScreen = () => {
     const postImage = await getDownloadURL(
       ref(storage, upload.metadata.fullPath)
     );
-    
-    const now=new Date();
-    const format_now=date.format(now,"YYYYMMDDhhmmss");
+
+    const now = new Date();
+    const format_now = date.format(now, "YYYYMMDDhhmmss");
     const storyData = {
       createdAt: parseInt(format_now),
       username: firstName + " " + lastName,
+      profilePicture: auth.currentUser.photoURL,
       storyImage: postImage,
+      visited: [],
     };
     await setDoc(doc(db, "Stories", uuidv4()), storyData);
     setLoading(false);

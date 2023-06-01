@@ -6,7 +6,7 @@ import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import { useSelector } from "react-redux";
 import date from "date-and-time";
-import { db, storage } from "./../../firebase";
+import { db, storage, auth } from "./../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
@@ -40,6 +40,7 @@ const AddPost = () => {
     const postData = {
       createdAt: new Date(),
       userName: firstName + " " + lastName,
+      profilePicture: auth.currentUser.photoURL,
       postCaption,
       postDate,
       postImage,

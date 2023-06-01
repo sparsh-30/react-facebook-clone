@@ -9,13 +9,12 @@ import { db, auth } from "./../../firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 const PostHeader = (props) => {
-  const avatarURL = useSelector((state) => state.user.avatarURL);
   return (
     <div className="mb-4 flex justify-between items-center">
       {/* User details div */}
       <div className="flex justify-center items-center w-fit">
         <Avatar
-          src={avatarURL}
+          src={props.profilePicture}
           sx={{
             width: "40px",
             height: "40px",
@@ -145,7 +144,11 @@ const Post = (props) => {
 
   return (
     <div className="bg-white rounded-xl p-5 my-4">
-      <PostHeader userName={post.userName} postDate={post.postDate} />
+      <PostHeader
+        userName={post.userName}
+        profilePicture={post.profilePicture}
+        postDate={post.postDate}
+      />
       <PostBody postImage={post.postImage} postCaption={post.postCaption} />
       <PostFooter
         userName={post.userName}

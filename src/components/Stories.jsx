@@ -1,24 +1,60 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { displayPictureScreen } from "../store/screenSlice";
+import { setStoryImageURL } from "../store/imageSlice";
 import Avatar from "@mui/material/Avatar";
 import AddStory from "./AddStory";
-import { db } from "./../../firebase";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db, auth } from "./../../firebase";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+} from "firebase/firestore";
 import date from "date-and-time";
 
 const Story = (props) => {
-  const avatarURL = useSelector((state) => state.user.avatarURL);
+  const dispatch = useDispatch();
+
+  const handleClick = async () => {
+    dispatch(setStoryImageURL(props.story.storyImage));
+    dispatch(displayPictureScreen());
+    if (props.story.visited.includes(auth.currentUser.email) === true) {
+      await updateDoc(doc(db, "Stories", props.story.id), {
+        visited: arrayRemove(auth.currentUser.email),
+      });
+    } else
+      await updateDoc(doc(db, "Stories", props.story.id), {
+        visited: arrayUnion(auth.currentUser.email),
+      });
+  };
 
   return (
-    <div className="mx-2 w-40 h-72 rounded-lg relative hover:cursor-pointer">
+    <div
+      onClick={handleClick}
+      className="mx-2 w-40 h-72 rounded-lg relative hover:cursor-pointer"
+    >
       <img
         src={props.story.storyImage}
         className="h-72 w-40 rounded-lg"
         alt="Story_Image"
       />
       <div className="flex justify-center items-center p-3  absolute top-0 left-0">
-        <div className="p-1 bg-gradient-to-r from-[#e30066] to-[#FEDA77] rounded-full">
-          <Avatar src={avatarURL} sx={{ width: "45px", height: "45px" }} />
+        <div
+          className={`p-1 rounded-full ${
+            props.story.visited.includes(auth.currentUser.email)
+              ? ""
+              : "bg-gradient-to-r from-[#e30066] to-[#FEDA77]"
+          }`}
+        >
+          <Avatar
+            src={props.story.profilePicture}
+            sx={{ width: "45px", height: "45px" }}
+          />
         </div>
       </div>
     </div>

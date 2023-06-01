@@ -19,6 +19,7 @@ const AddPost = () => {
 
   const firstName = useSelector((state) => state.user.firstName);
   const lastName = useSelector((state) => state.user.lastName);
+  const avatarURL = useSelector((state) => state.user.avatarURL);
 
   const savePost = async () => {
     setLoading(true);
@@ -56,15 +57,13 @@ const AddPost = () => {
       {/* Profile picture and write something input box */}
       <div className="flex items-center mt-1">
         <Avatar
+          src={avatarURL}
           sx={{
             width: "40px",
             height: "40px",
-            backgroundColor: "primary.dark",
           }}
           className="mr-2"
-        >
-          {firstName.charAt(0)}
-        </Avatar>
+        />
         <div className="w-full h-[35px] relative">
           <input
             ref={userCaption}

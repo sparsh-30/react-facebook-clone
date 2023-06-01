@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "./../../firebase";
 import { useDispatch } from "react-redux";
-import { setFirstName, setLastName } from "./../store/userSlice";
+import { setFirstName, setLastName, setAvatarURL } from "./../store/userSlice";
 
 const Login = () => {
   const googleProvider = new GoogleAuthProvider();
@@ -19,9 +19,11 @@ const Login = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         console.log(result);
+        console.log(result._tokenResponse.photoUrl);
         console.log(result._tokenResponse.fullName);
         dispatch(setFirstName(result._tokenResponse.firstName));
         dispatch(setLastName(result._tokenResponse.lastName));
+        dispatch(setAvatarURL(result._tokenResponse.photoUrl));
       })
       .catch((error) => {
         console.log(error);

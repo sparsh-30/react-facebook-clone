@@ -11,6 +11,7 @@ const LeftSidebar = () => {
 
   const firstName = useSelector((state) => state.user.firstName);
   const lastName = useSelector((state) => state.user.lastName);
+  const avatarURL = useSelector((state) => state.user.avatarURL);
 
   const handleLogOut = () => {
     signOut(auth).then(() => dispatch(signOutUser()));
@@ -21,11 +22,10 @@ const LeftSidebar = () => {
       <ul>
         <li className="flex p-2 justify-start items-center w-2/3 rounded-xl hover:bg-white transition-all ease-in-out duration-150 cursor-pointer">
           <Avatar
-            sx={{ width: "35px", height: "35px", backgroundColor: "info.main" }}
-            className="mr-3 text-blue-600"
-          >
-            {firstName.charAt(0)}
-          </Avatar>
+            src={avatarURL}
+            sx={{ width: "35px", height: "35px" }}
+            className="mr-3"
+          />
           <p className="text-lg font-bold">{firstName + " " + lastName}</p>
         </li>
 

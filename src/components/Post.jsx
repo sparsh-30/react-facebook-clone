@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { BsThreeDots } from "react-icons/bs";
 import { AiTwotoneLike, AiOutlineLike, AiOutlineFileGif } from "react-icons/ai";
 import { FaComment, FaRegComment } from "react-icons/fa";
@@ -8,20 +9,19 @@ import { db, auth } from "./../../firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 const PostHeader = (props) => {
+  const avatarURL = useSelector((state) => state.user.avatarURL);
   return (
     <div className="mb-4 flex justify-between items-center">
       {/* User details div */}
       <div className="flex justify-center items-center w-fit">
         <Avatar
+          src={avatarURL}
           sx={{
             width: "40px",
             height: "40px",
-            backgroundColor: "primary.dark",
           }}
           className="mr-3"
-        >
-          {props.userName.charAt(0)}
-        </Avatar>
+        />
         <div>
           <p className="font-semibold text-sm">{props.userName}</p>
           <p className="text-sm font-semibold text-gray-600">
@@ -59,6 +59,8 @@ const PostBody = (props) => {
 };
 
 const PostFooter = (props) => {
+  const avatarURL = useSelector((state) => state.user.avatarURL);
+
   const handleLike = async () => {
     if (props.postLikes.includes(auth.currentUser.email) === true) {
       await updateDoc(doc(db, "Posts", props.postID), {
@@ -108,15 +110,13 @@ const PostFooter = (props) => {
       {/* Add Comment */}
       <div className="flex items-center mt-3">
         <Avatar
+          src={avatarURL}
           sx={{
             width: "40px",
             height: "40px",
-            backgroundColor: "primary.dark",
           }}
           className="mr-2"
-        >
-          {props.userName.charAt(0)}
-        </Avatar>
+        />
         <div className="w-full h-[35px] relative">
           <input
             type="text"

@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import AddStory from "./AddStory";
 import { db } from "./../../firebase";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-// import randomColor from "randomcolor";
+import date from "date-and-time";
 
 const Story = (props) => {
   return (
@@ -14,9 +14,6 @@ const Story = (props) => {
         className="h-72 w-40 rounded-lg"
         alt="Story_Image"
       />
-      <div className="flex justify-center items-center absolute bottom-0 py-4 w-full">
-        {/* <p className="font-bold text-xl text-white">{props.story.username}</p> */}
-      </div>
       <div className="flex justify-center items-center p-3 absolute top-0 left-0">
         <Avatar
           className="border-[6px] border-blue-600"
@@ -54,7 +51,9 @@ const Stories = () => {
           <Story />
           <Story /> */}
           {stories.map((story, index) => {
-            return <Story key={index} story={story} />;
+            const now=new Date();
+            const format_now=parseInt(date.format(now,"YYYYMMDDhhmmss"));
+            if(format_now-story.createdAt<24*60*60) return <Story key={index} story={story} />;
           })}
         </div>
       </div>

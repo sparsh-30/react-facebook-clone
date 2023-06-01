@@ -5,6 +5,7 @@ import { db, storage } from "./../../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import date from 'date-and-time';
 
 const AddStoryScreen = () => {
   const [storyImage, setStoryImage] = useState("");
@@ -31,9 +32,11 @@ const AddStoryScreen = () => {
     const postImage = await getDownloadURL(
       ref(storage, upload.metadata.fullPath)
     );
-
+    
+    const now=new Date();
+    const format_now=date.format(now,"YYYYMMDDhhmmss");
     const storyData = {
-      createdAt: new Date(),
+      createdAt: parseInt(format_now),
       username: firstName + " " + lastName,
       storyImage: postImage,
     };

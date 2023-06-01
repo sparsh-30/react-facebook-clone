@@ -1,24 +1,28 @@
-import story_image from "./../assets/demo.jfif";
+import { useState } from "react";
+// import story_image from "./../assets/demo.jfif";
 import Avatar from "@mui/material/Avatar";
 import AddStory from "./AddStory";
+import { db } from "./../../firebase";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+// import randomColor from "randomcolor";
 
-const Story = () => {
+const Story = (props) => {
   return (
     <div className="mx-2 w-40 h-72 rounded-lg relative hover:cursor-pointer">
       <img
-        src={story_image}
+        src={props.story.storyImage}
         className="h-72 w-40 rounded-lg"
         alt="Story_Image"
       />
       <div className="flex justify-center items-center absolute bottom-0 py-4 w-full">
-        <p className="font-bold text-xl text-white">Sparsh</p>
+        {/* <p className="font-bold text-xl text-white">{props.story.username}</p> */}
       </div>
       <div className="flex justify-center items-center p-3 absolute top-0 left-0">
         <Avatar
           className="border-[6px] border-blue-600"
           sx={{ width: "50px", height: "50px" }}
         >
-          S
+          {props.story.username[0]}
         </Avatar>
       </div>
     </div>
@@ -26,17 +30,32 @@ const Story = () => {
 };
 
 const Stories = () => {
+  const [stories, setStories] = useState([]);
+
+  const postRef = collection(db, "Stories");
+  onSnapshot(query(postRef, orderBy("createdAt", "desc")), (snapshot) => {
+    setStories(
+      snapshot.docs.map((story) => ({ id: story.id, ...story.data() }))
+    );
+  });
+
   return (
     <div>
       {/* <div className="w-[100vw] h-[100vh] bg-white fixed top-0 left-0 z-50"></div> */}
-      <div id="stories-holder" className="my-4 py-5 px-2 flex bg-white rounded-lg w-full overflow-x-scroll">
+      <div
+        id="stories-holder"
+        className="my-4 py-5 px-2 flex bg-white rounded-lg w-full overflow-x-scroll"
+      >
         <div className="flex">
           <AddStory />
+          {/* <Story />
           <Story />
           <Story />
           <Story />
-          <Story />
-          <Story />
+          <Story /> */}
+          {stories.map((story, index) => {
+            return <Story key={index} story={story} />;
+          })}
         </div>
       </div>
     </div>

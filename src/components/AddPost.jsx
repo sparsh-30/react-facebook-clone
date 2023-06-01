@@ -47,7 +47,6 @@ const AddPost = () => {
     };
 
     await setDoc(doc(db, "Posts", uuidv4()), postData);
-    alert("Post Added");
     userCaption.current.value = "";
     setLoading(false);
   };

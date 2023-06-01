@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import LeftSidebar from "./components/LeftSidebar";
 import PostHolder from "./components/PostHolder";
 import Login from "./components/Login";
+import AddStoryScreen from "./components/AddStoryScreen";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setFirstName,
@@ -16,6 +17,7 @@ import { onAuthStateChanged } from "firebase/auth";
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userSignedIn);
+  const showStoryScreen = useSelector((state) => state.screen.showStoryScreen);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -34,11 +36,14 @@ function App() {
         <Login />
       ) : (
         <div>
-          <Navbar />
-          <div className="mt-[65px] grid grid-cols-7">
-            <LeftSidebar />
-            <PostHolder />
-            <div className="w-2/4"></div>
+          {showStoryScreen === true ? <AddStoryScreen /> : ""}
+          <div>
+            <Navbar />
+            <div className="mt-[65px] grid grid-cols-7">
+              <LeftSidebar />
+              <PostHolder />
+              <div className="w-2/4"></div>
+            </div>
           </div>
         </div>
       )}

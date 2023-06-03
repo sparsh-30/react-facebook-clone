@@ -33,7 +33,7 @@ const Navbar = () => {
       </div>
 
       {/* Center tabs div */}
-      <div className="flex justify-center items-center z-20 fixed top-0 w-full">
+      <div className="flex justify-center items-center fixed top-0 w-full z-20">
         <div
           onClick={() => setIconIndex(0)}
           className={`h-12 w-20 flex justify-center items-end transition-all duration-150 ease-in-out ${
